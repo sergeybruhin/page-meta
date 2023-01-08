@@ -17,36 +17,40 @@ composer require sergeybruhin/page-meta
 
 ```php
 $openGraph = PageMeta::openGraphArticle(
-        route('home'),
-        $page->name,
-        $page->description,
-        'Your site name',
-    );
+    route('home'),
+    $page->name,
+    $page->description,
+    'Your site name',
+);
 
-    $openGraph->addImage(
-        'https://example.com/image/url.png',
-        100,
-        100,
-        Image::TYPE_WEBP
-    );
+$openGraph->addImage(
+    'https://example.com/image/url.png',
+    100,
+    100,
+    Image::TYPE_WEBP
+);
 
-    $openGraph->addTags(['Some tag', 'And', 'Another Tag']);
+$openGraph->addTags([
+    'Some tag',
+    'And',
+    'Another Tag'
+]);
 
-    $openGraph->addAuthors([
-        'https://example.com/author/some-author',
-        'https://example.com/author/another',
-    ]);
+$openGraph->addAuthors([
+    'https://example.com/author/some-author',
+    'https://example.com/author/another',
+]);
 ```
 
 ## Render Page Meta
 
-Feel free to render sitemap in place you prefer.
+Feel free to render page meta in place you prefer.
 
 ```php
  @include('page-meta::open-graph')
 ```
 
-Widget will be rendered if variable **$openGraph** is set.
+Template will be rendered if variable **$openGraph** is set.
 
 ### Testing (Not yet 💁‍♂️)
 
