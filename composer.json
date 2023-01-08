@@ -1,0 +1,56 @@
+{
+    "name": "sergeybruhin/page-meta",
+    "description": "Laravel Page Meta Package",
+    "keywords": [
+        "sergeybruhin",
+        "page-meta",
+        "seo",
+        "laravel",
+        "open-graph",
+        "twitter"
+    ],
+    "homepage": "https://github.com/sergeybruhin/page-meta",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Sergey Bruhin",
+            "email": "sundaycreative@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SergeyBruhin\\PageMeta\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SergeyBruhin\\PageMeta\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SergeyBruhin\\PageMeta\\Providers\\PageMetaServiceProvider"
+            ],
+            "aliases": {
+                "PageMeta": "SergeyBruhin\\PageMeta\\Facades\\PageMeta"
+            }
+        }
+    }
+}

@@ -1,0 +1,5 @@
+@include('page-meta::open-graph.tags.type')
+@include('page-meta::open-graph.tags.title')
+@include('page-meta::open-graph.tags.url')
+@include('page-meta::open-graph.tags.images')
+@include('page-meta::open-graph.tags.description')
