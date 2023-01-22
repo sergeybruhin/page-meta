@@ -4,7 +4,7 @@ namespace SergeyBruhin\PageMeta\Meta\OpenGraph\Types;
 
 use SergeyBruhin\PageMeta\Meta\OpenGraph\OpenGraph;
 
-final class RestaurantMenu extends OpenGraph
+final class RestaurantMenuItem extends OpenGraph
 {
     public function __construct(string $url, string $title, string $description, string $siteName = null)
     {
