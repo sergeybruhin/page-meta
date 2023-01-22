@@ -66,12 +66,12 @@ abstract class OpenGraph
         return $this;
     }
 
-    public function pushImage(Image $image)
+    public function pushImage(Image $image): void
     {
         $this->images->add($image);
     }
 
-    public function addImage(string $url, int $width = null, int $height = null, string $type = null)
+    public function addImage(string $url, int $width = null, int $height = null, string $type = null): void
     {
         $this->images->add(
             (new Image($url, $width, $height, $type))

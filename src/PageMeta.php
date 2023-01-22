@@ -9,6 +9,8 @@ use SergeyBruhin\PageMeta\Meta\OpenGraph\Types\Product;
 use SergeyBruhin\PageMeta\Meta\OpenGraph\Types\Profile;
 use SergeyBruhin\PageMeta\Meta\OpenGraph\Types\Restaurant;
 use SergeyBruhin\PageMeta\Meta\OpenGraph\Types\Website;
+use SergeyBruhin\PageMeta\Meta\Twitter\Types\Summary;
+use SergeyBruhin\PageMeta\Meta\Twitter\Types\SummaryLargeImage;
 
 class PageMeta
 {
@@ -28,8 +30,19 @@ class PageMeta
     {
         return new Article($url, $title, $description, $siteName);
     }
+
     public function openGraphWebsite(string $url, string $title, string $description, string $siteName = null): Website
     {
         return new Website($url, $title, $description, $siteName);
+    }
+
+    public function twitterCardSummary(string $title = '', string $imageUrl = '', string $description = '', string $site = ''): Summary
+    {
+        return new Summary($title, $imageUrl, $description, $site);
+    }
+
+    public function twitterCardSummaryLargeImage(string $title = '', string $imageUrl = '', string $description = '', string $site = '', string $creator = ''): SummaryLargeImage
+    {
+        return new SummaryLargeImage($title, $imageUrl, $description, $site, $creator);
     }
 }
