@@ -13,7 +13,82 @@ You can install the package via composer:
 composer require sergeybruhin/page-meta
 ```
 
-## Compose Page Meta in Controller
+---
+
+## Head Meta
+
+Generates standard HTML `<head>` meta tags: title, description, author, keywords, robots directives, and canonical URL.
+
+### Controller
+
+```php
+$headMeta = PageMeta::headMeta(
+    title: 'My Article',
+    description: 'Short page description',
+);
+
+$headMeta->setTitle('My Article', ' | ')  // appends site name: "My Article | Site Name"
+         ->setCanonical(route('blog.show', $post))
+         ->setAuthor('Sergey Bruhin')
+         ->setKeywords(['laravel', 'php', 'seo'])
+         ->noIndex()
+         ->noFollow();
+```
+
+### Render
+
+```blade
+@include('page-meta::head-meta')
+```
+
+Template renders when `$headMeta` is set in the view.
+
+### Output
+
+```html
+<title>My Article | Site Name</title>
+<meta name="description" content="Short page description">
+<meta name="author" content="Sergey Bruhin">
+<meta name="keywords" content="laravel, php, seo">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://example.com/blog/my-article">
+```
+
+### Available methods
+
+| Method | Description |
+|---|---|
+| `setTitle(string, ?string $separator)` | Page title. Pass a separator (e.g. `' \| '`) to append `globalSiteName` from config. |
+| `setDescription(string)` | Meta description. |
+| `setAuthor(string)` | Meta author. |
+| `setCanonical(string)` | Canonical URL. Only rendered when set. |
+| `setKeywords(string\|array)` | Meta keywords. |
+| `setRobots(string)` | Raw robots string, e.g. `'noindex, nofollow'`. |
+| `noIndex()` | Adds `noindex` to robots. |
+| `noFollow()` | Adds `nofollow` to robots. |
+| `noArchive()` | Adds `noarchive` to robots. |
+| `noSnippet()` | Adds `nosnippet` to robots. |
+
+### Configuration
+
+Publish the config to set your site name:
+
+```bash
+php artisan vendor:publish --provider="SergeyBruhin\PageMeta\Providers\PageMetaServiceProvider" --tag="config"
+```
+
+```php
+// config/page-meta.php
+return [
+    'globalSiteName' => 'Your Site Name',
+];
+```
+
+---
+
+## Open Graph
+
+### Controller
 
 ```php
 $openGraph = PageMeta::openGraphArticle(
@@ -42,15 +117,15 @@ $openGraph->addAuthors([
 ]);
 ```
 
-## Render Page Meta
+### Render
 
-Feel free to render page meta in place you prefer.
-
-```php
- @include('page-meta::open-graph')
+```blade
+@include('page-meta::open-graph')
 ```
 
-Template will be rendered if variable **$openGraph** is set.
+Template renders when `$openGraph` is set in the view.
+
+---
 
 ### Testing (Not yet 💁‍♂️)
 
