@@ -2,6 +2,7 @@
 
 namespace SergeyBruhin\PageMeta;
 
+use SergeyBruhin\PageMeta\Meta\HeadMeta;
 use SergeyBruhin\PageMeta\Meta\OpenGraph\OpenGraph;
 use SergeyBruhin\PageMeta\Meta\OpenGraph\Types\Article;
 use SergeyBruhin\PageMeta\Meta\OpenGraph\Types\Business;
@@ -14,6 +15,18 @@ use SergeyBruhin\PageMeta\Meta\Twitter\Types\SummaryLargeImage;
 
 class PageMeta
 {
+    public function headMeta(string $title = null, string $description = null): HeadMeta
+    {
+        $meta = new HeadMeta();
+        if ($title !== null) {
+            $meta->setTitle($title);
+        }
+        if ($description !== null) {
+            $meta->setDescription($description);
+        }
+        return $meta;
+    }
+
     public function openGraph(string $type, string $url, string $title, string $description, string $siteName = null): OpenGraph
     {
         return match ($type) {
