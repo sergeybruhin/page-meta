@@ -10,6 +10,12 @@ use SergeyBruhin\PageMeta\Meta\OpenGraph\Types\Product;
 use SergeyBruhin\PageMeta\Meta\OpenGraph\Types\Profile;
 use SergeyBruhin\PageMeta\Meta\OpenGraph\Types\Restaurant;
 use SergeyBruhin\PageMeta\Meta\OpenGraph\Types\Website;
+use SergeyBruhin\PageMeta\Meta\Schema\Schema;
+use SergeyBruhin\PageMeta\Meta\Schema\SchemaGraph;
+use SergeyBruhin\PageMeta\Meta\Schema\Types\Article as SchemaArticle;
+use SergeyBruhin\PageMeta\Meta\Schema\Types\BreadcrumbList as SchemaBreadcrumbList;
+use SergeyBruhin\PageMeta\Meta\Schema\Types\Organization as SchemaOrganization;
+use SergeyBruhin\PageMeta\Meta\Schema\Types\WebSite as SchemaWebSite;
 use SergeyBruhin\PageMeta\Meta\Twitter\Types\Summary;
 use SergeyBruhin\PageMeta\Meta\Twitter\Types\SummaryLargeImage;
 
@@ -57,5 +63,30 @@ class PageMeta
     public function twitterCardSummaryLargeImage(string $title = '', string $imageUrl = '', string $description = '', string $site = '', string $creator = ''): SummaryLargeImage
     {
         return new SummaryLargeImage($title, $imageUrl, $description, $site, $creator);
+    }
+
+    public function schemaOrganization(string $name, string $url, string $type = SchemaOrganization::TYPE_ORGANIZATION): SchemaOrganization
+    {
+        return new SchemaOrganization($name, $url, $type);
+    }
+
+    public function schemaWebsite(string $name, string $url): SchemaWebSite
+    {
+        return new SchemaWebSite($name, $url);
+    }
+
+    public function schemaArticle(string $headline): SchemaArticle
+    {
+        return new SchemaArticle($headline);
+    }
+
+    public function schemaBreadcrumbList(array $breadcrumbs = []): SchemaBreadcrumbList
+    {
+        return SchemaBreadcrumbList::fromArray($breadcrumbs);
+    }
+
+    public function schemaGraph(Schema ...$nodes): SchemaGraph
+    {
+        return new SchemaGraph(...$nodes);
     }
 }

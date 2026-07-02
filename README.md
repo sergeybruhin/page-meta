@@ -127,6 +127,72 @@ Template renders when `$openGraph` is set in the view.
 
 ---
 
+---
+
+## Schema.org (JSON-LD)
+
+Unlike Head Meta / Open Graph / Twitter (which render tag-by-tag from a Blade
+partial), Schema.org nodes are plain data objects that serialize to a nested
+array via `toArray()`/`JsonSerializable`, then get JSON-encoded once as a
+single `<script type="application/ld+json">` tag.
+
+### Controller
+
+```php
+$organization = PageMeta::schemaOrganization('Your Site', route('home'))
+    ->setDescription('Short site description')
+    ->setTelephone('+1 555 0100')
+    ->setEmail('hello@example.com')
+    ->setAddress(
+        (new PostalAddress())
+            ->setStreetAddress('123 Main St')
+            ->setAddressLocality('Springfield')
+            ->setAddressCountry('US')
+    )
+    ->addSameAsMany([
+        'https://www.instagram.com/yoursite/',
+        'https://www.facebook.com/yoursite/',
+    ]);
+
+$website = PageMeta::schemaWebsite('Your Site', route('home'))
+    ->setPublisher($organization);
+
+$article = PageMeta::schemaArticle($post->name)
+    ->setDescription($post->description)
+    ->setImage(new ImageObject($post->cover->url, 1200, 630))
+    ->setDatePublished($post->published_at)
+    ->setUrl(route('blog.show', $post))
+    ->addKeywords($post->tags->pluck('name')->all());
+
+$breadcrumbs = PageMeta::schemaBreadcrumbList($post->breadcrumbs);
+
+$schema = PageMeta::schemaGraph($organization, $website, $article, $breadcrumbs);
+```
+
+`schemaGraph()` always wraps its nodes in a single `{"@context": "https://schema.org", "@graph": [...]}` document — even for a single node — so there's one entry point regardless of how many nodes a page needs.
+
+### Render
+
+```blade
+@include('page-meta::schema')
+```
+
+Template renders when `$schema` is set in the view.
+
+### Available types
+
+| Factory | Type | Notes |
+|---|---|---|
+| `PageMeta::schemaOrganization(name, url, type = 'Organization')` | `Organization` | Pass `Organization::TYPE_LOCAL_BUSINESS` for a `LocalBusiness`-flavored node. |
+| `PageMeta::schemaWebsite(name, url)` | `WebSite` | `setPublisher(Organization)`. |
+| `PageMeta::schemaArticle(headline)` | `Article` | `setImage`, `setDatePublished`/`setDateModified`, `setAuthor(Person)`, `setPublisher(Organization)`, `addKeywords`. |
+| `PageMeta::schemaBreadcrumbList(array $breadcrumbs = [])` | `BreadcrumbList` | Accepts `[['url' => .., 'name' => ..], ...]` directly. |
+
+Value objects live under `Meta\Schema\Partials`: `PostalAddress`, `ImageObject`, `Person`, `ListItem`.
+
+Every property is stripped from the output when `null`/empty, so it's safe to
+build a node from partially-available data.
+
 ### Testing (Not yet 💁‍♂️)
 
 ```bash

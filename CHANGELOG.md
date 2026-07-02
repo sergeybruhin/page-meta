@@ -2,6 +2,10 @@
 
 All notable changes to `page-meta` will be documented in this file
 
+## 1.1.0 - 2026-07-02
+
+- Add Schema.org / JSON-LD support (`Organization`, `WebSite`, `Article`, `BreadcrumbList`) via `PageMeta::schema*()` factories and the `page-meta::schema` view
+
 ## 1.0.0 - 2026-04-10
 
 - planned: HtmlMeta support (title, description, author, canonical, robots/noindex)
