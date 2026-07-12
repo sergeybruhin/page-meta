@@ -10,7 +10,7 @@ class Summary extends TwitterCard
     public string $title;
     public string $image;
 
-    public function __construct(string $title, string $description = '', string $image = '', string $site = null)
+    public function __construct(string $title, string $description = '', string $image = '', string $site = '')
     {
         parent::__construct($description, $site);
         $this->type = self::TYPE_SUMMARY;

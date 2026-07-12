@@ -16,7 +16,7 @@ class Image
     public const TYPE_WEBP = 'image/webp';
 
 
-    public function __construct(string $url, int $width = null, int $height = null, string $type = null)
+    public function __construct(string $url, ?int $width = null, ?int $height = null, ?string $type = null)
     {
         $this->url = $url;
         $this->width = $width;

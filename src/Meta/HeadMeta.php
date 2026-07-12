@@ -18,7 +18,7 @@ class HeadMeta
      * @param string|null $separator  Appends config globalSiteName when provided, e.g. ' | '
      * @return static
      */
-    public function setTitle(string $title, string $separator = null): static
+    public function setTitle(string $title, ?string $separator = null): static
     {
         $this->title = $title;
         $this->titleSeparator = $separator;

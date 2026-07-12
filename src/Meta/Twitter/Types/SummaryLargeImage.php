@@ -11,10 +11,10 @@ class SummaryLargeImage extends TwitterCard
     public string $creator;
     public string $image;
 
-    public function __construct(string $title, string $description = '', string $image = '', string $site = null, string $creator = '')
+    public function __construct(string $title, string $description = '', string $image = '', string $site = '', string $creator = '')
     {
         parent::__construct($description, $site);
-        $this->type = self::TYPE_SUMMARY;
+        $this->type = self::TYPE_SUMMARY_LARGE_IMAGE;
         $this->title = $title;
         $this->creator = $creator;
         $this->description = $description;

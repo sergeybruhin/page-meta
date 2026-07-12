@@ -10,7 +10,7 @@ final class Product extends OpenGraph
     public float $amount;
     public string $currency;
 
-    public function __construct(string $url, string $title, string $description, string $siteName = null)
+    public function __construct(string $url, string $title, string $description, ?string $siteName = null)
     {
         parent::__construct($url, $title, $description, $siteName);
     }

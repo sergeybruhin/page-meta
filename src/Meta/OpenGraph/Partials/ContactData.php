@@ -11,10 +11,10 @@ final class ContactData
     public ?string $postalCode;
 
     public function __construct(
-        string $countryName = null,
-        string $region = null,
-        string $locality = null,
-        string $streetAddress = null,
+        ?string $countryName = null,
+        ?string $region = null,
+        ?string $locality = null,
+        ?string $streetAddress = null,
                $postalCode = null
     )
     {

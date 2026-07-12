@@ -6,7 +6,7 @@ use SergeyBruhin\PageMeta\Meta\OpenGraph\OpenGraph;
 
 final class RestaurantMenu extends OpenGraph
 {
-    public function __construct(string $url, string $title, string $description, string $siteName = null)
+    public function __construct(string $url, string $title, string $description, ?string $siteName = null)
     {
         parent::__construct($url, $title, $description, $siteName);
         $this->type = self::TYPE_RESTAURANT_MENU;

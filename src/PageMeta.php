@@ -21,7 +21,7 @@ use SergeyBruhin\PageMeta\Meta\Twitter\Types\SummaryLargeImage;
 
 class PageMeta
 {
-    public function headMeta(string $title = null, string $description = null): HeadMeta
+    public function headMeta(?string $title = null, ?string $description = null): HeadMeta
     {
         $meta = new HeadMeta();
         if ($title !== null) {
@@ -33,7 +33,7 @@ class PageMeta
         return $meta;
     }
 
-    public function openGraph(string $type, string $url, string $title, string $description, string $siteName = null): OpenGraph
+    public function openGraph(string $type, string $url, string $title, string $description, ?string $siteName = null): OpenGraph
     {
         return match ($type) {
             OpenGraph::TYPE_ARTICLE => new Article($url, $title, $description, $siteName),
@@ -45,24 +45,24 @@ class PageMeta
         };
     }
 
-    public function openGraphArticle(string $url, string $title, string $description, string $siteName = null): Article
+    public function openGraphArticle(string $url, string $title, string $description, ?string $siteName = null): Article
     {
         return new Article($url, $title, $description, $siteName);
     }
 
-    public function openGraphWebsite(string $url, string $title, string $description, string $siteName = null): Website
+    public function openGraphWebsite(string $url, string $title, string $description, ?string $siteName = null): Website
     {
         return new Website($url, $title, $description, $siteName);
     }
 
     public function twitterCardSummary(string $title = '', string $imageUrl = '', string $description = '', string $site = ''): Summary
     {
-        return new Summary($title, $imageUrl, $description, $site);
+        return new Summary(title: $title, description: $description, image: $imageUrl, site: $site);
     }
 
     public function twitterCardSummaryLargeImage(string $title = '', string $imageUrl = '', string $description = '', string $site = '', string $creator = ''): SummaryLargeImage
     {
-        return new SummaryLargeImage($title, $imageUrl, $description, $site, $creator);
+        return new SummaryLargeImage(title: $title, description: $description, image: $imageUrl, site: $site, creator: $creator);
     }
 
     public function schemaOrganization(string $name, string $url, string $type = SchemaOrganization::TYPE_ORGANIZATION): SchemaOrganization

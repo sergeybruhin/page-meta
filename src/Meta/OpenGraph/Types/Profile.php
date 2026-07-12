@@ -10,7 +10,7 @@ final class Profile extends OpenGraph
     public string $lastName;
     public string $userName;
 
-    public function __construct(string $url, string $title, string $description, string $siteName = null)
+    public function __construct(string $url, string $title, string $description, ?string $siteName = null)
     {
         parent::__construct($url, $title, $description, $siteName);
     }

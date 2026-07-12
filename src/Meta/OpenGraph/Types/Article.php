@@ -15,7 +15,7 @@ final class Article extends OpenGraph
     public Collection $tags;
     public ?string $section = null;
 
-    public function __construct(string $url, string $title, string $description, string $siteName = null)
+    public function __construct(string $url, string $title, string $description, ?string $siteName = null)
     {
         parent::__construct($url, $title, $description, $siteName);
         $this->type = self::TYPE_ARTICLE;

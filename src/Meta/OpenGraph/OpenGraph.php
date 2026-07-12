@@ -35,7 +35,7 @@ abstract class OpenGraph
     const TYPE_VIDEO_OTHER = 'video.other'; // This object type represents a generic video, and contains references to the actors and other professionals involved in its production. For specific types of video content, use the video.movie or video.tv_show object types. This type is for any other type of video content not represented elsewhere (eg. trailers, music videos, clips, news segments etc.)
 
 
-    #[Pure] public function __construct(string $url, string $title, string $description, string $siteName = null)
+    #[Pure] public function __construct(string $url, string $title, string $description, ?string $siteName = null)
     {
         $this->url = $url;
         $this->title = $title;
@@ -71,7 +71,7 @@ abstract class OpenGraph
         $this->images->add($image);
     }
 
-    public function addImage(string $url, int $width = null, int $height = null, string $type = null): void
+    public function addImage(string $url, ?int $width = null, ?int $height = null, ?string $type = null): void
     {
         $this->images->add(
             (new Image($url, $width, $height, $type))
